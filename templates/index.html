@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta name="description" content="Dominion Randomizer">
+<title>Dominion Randomizer</title>
+<script>const expan_list = {{ expan_list | tojson }}; </script>
+{% endblock head %}
+
+{% block body_attrs %} onload="load_fun(expan_list);" {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="text-center">
+        <h1>Simple Dominion Randomizer</h1>
+    </div>
+</div>
+<div class="container border">
+    <section>
+        <form action="/" method="POST" id="inputs">
+            <div class="mb-3">
+                <label for="mode" class="form-label">Select mode:</label>
+                <select name="mode" id="mode" onchange="mode_sel()" class="form-select">
+                    <option value="a">Expansion</option>
+                    <option value="b">Kindom Card</option>
+                    <option value="c">Event</option>
+                    <option value="d">Landmark</option>
+                    <option value="e">Project</option>
+                    <option value="f">Ways</option>
+                    <option value="g">Allies</option>
+                </select>
+            </div>
+            <div class="mb-3" id="sel_expan" style="display:none">
+                <label for="expan" class="form-label">Select Expansion:</label>
+                <select name="expan" id="expan" class="form-select">
+                    <!-- <option value="0">Base</option>
+                    <option value="1">Intrigue</option>
+                    <option value="2">Seaside</option>
+                    <option value="3">Alchemy</option>
+                    <option value="4">Prosperity</option>
+                    <option value="5">Cornucopia</option>
+                    <option value="6">Hinterlands</option>
+                    <option value="7">Dark Ages</option>
+                    <option value="8">Guilds</option>
+                    <option value="9">Adventures</option>
+                    <option value="10">Empires</option>
+                    <option value="11">Nocturne</option>
+                    <option value="12">Renaissance</option>
+                    <option value="13">Menagerie</option>
+                    <option value="14">Allies</option>
+                    <option value="15">Promo</option> -->
+                </select>
+            </div>
+            <div class="form-floating">
+                <input type="number" name="n_cards" id="n_cards" min="1" max="10" class="form-control">
+                <label for="n_cards" id="lab_card_expan">No. of Expansions:</label>
+            </div>
+            <div class="text-center mt-3 mb-3">
+                <button type="submit" class="btn btn-primary">Randomize</button>
+                <button type="reset" class="btn btn-secondary" onclick="reset_ex()">Reset</button>
+            </div>
+        </form>
+    </section>
+</div>
+<div class="container mt-3 text-center">
+    <section>
+        {{ output_table|safe }}
+        <!-- {% for table in output_table %}
+        {{ table|safe }}
+        {% endfor %} -->
+        <div class="row">
+            <p>
+                {{ outputs }}
+            </p>
+        </div>
+    </section>
+</div>
+<footer class="text-center">
+    <a href="https://github.com/wjyzxcv/dom_rand">
+        <img class="img-fluid" style="max-width: 30px;"
+            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Github">
+    </a>
+</footer>
+<script src="static/js/index.js"></script>
+{% endblock body %}
