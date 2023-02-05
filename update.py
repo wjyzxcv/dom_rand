@@ -47,7 +47,7 @@ d_table = d_table[~d_table["Name"].isin(["Plunder",
                                        "Province",
                                        "Curse",
                                        "Colony"])]
-d_table = d_table[~d_table["Types"].str.contains("Prize|Ruins|Shelter|Heirloom|Castle|Knight|Artifact/Zombie/Townsfolk/Augur/Odyssey/Wizard/Fort/Clash")]
+d_table = d_table[~d_table["Types"].str.contains("Prize|Ruins|Shelter|Heirloom|Castle|Knight|Artifact|Zombie|Townsfolk|Augur|Odyssey|Wizard|Fort|Clash")]
 d_table = d_table[~d_table["Text"].str.contains("This is not in the Supply.")]
 d_table.append(["Castle", "Empires", "Victory", "NaN", "NaN"])
 d_table.append(["Knight", "Dark Ages", "Action", "NaN", "NaN"])
