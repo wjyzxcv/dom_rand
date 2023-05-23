@@ -1,4 +1,4 @@
-event_expan = ["9", "10", "13", "15"];
+event_expan = ["9", "10", "13", "15", "16"];
 
 function reset_ex(onload = true) {
   if (onload) {
@@ -48,6 +48,9 @@ function mode_sel() {
     case "e":
     case "f":
     case "g":
+      document.getElementById("lab_card_expan").innerHTML = "No. of Cards";
+      break;
+    case "h":
       document.getElementById("lab_card_expan").innerHTML = "No. of Cards";
       break;
   }
