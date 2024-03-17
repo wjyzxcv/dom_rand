@@ -1,4 +1,5 @@
 import pandas as pd
+
 import sqlite3 as sq
 
 # %% get card info and clean up
@@ -58,19 +59,29 @@ d_table = d_table[
 ]
 d_table = d_table[
     ~d_table["Types"].str.contains(
-        "Prize|Ruins|Shelter|Heirloom|Castle|Knight|Artifact|Zombie|Townsfolk|Augur|Odyssey|Wizard|Fort|Clash|Loot"
+        "Prize|Ruins|Shelter|Heirloom|Castle|Knight|Artifact|Zombie|Townsfolk|Augur|Odyssey|Wizard|Fort|Clash|Loot|State"
     )
 ]
 d_table = d_table[~d_table["Text"].str.contains("This is not in the Supply.")]
-d_table.append(["Castle", "Empires", "Victory", "NaN", "NaN"])
-d_table.append(["Knight", "Dark Ages", "Action", "NaN", "NaN"])
-d_table.append(["Townsfolk", "Allies", "Action", "NaN", "NaN"])
-d_table.append(["Augur", "Allies", "Action", "NaN", "NaN"])
-d_table.append(["Odyssey", "Allies", "Action", "NaN", "NaN"])
-d_table.append(["Wizard", "Allies", "Action", "NaN", "NaN"])
-d_table.append(["Fort", "Allies", "Action", "NaN", "NaN"])
-d_table.append(["Clash", "Allies", "Action", "NaN", "NaN"])
+#.append depreciated
+# d_table.append(["Castle", "Empires", "Victory", "NaN", "NaN"])
+# d_table.append(["Knight", "Dark Ages", "Action", "NaN", "NaN"])
+# d_table.append(["Townsfolk", "Allies", "Action", "NaN", "NaN"])
+# d_table.append(["Augur", "Allies", "Action", "NaN", "NaN"])
+# d_table.append(["Odyssey", "Allies", "Action", "NaN", "NaN"])
+# d_table.append(["Wizard", "Allies", "Action", "NaN", "NaN"])
+# d_table.append(["Fort", "Allies", "Action", "NaN", "NaN"])
+# d_table.append(["Clash", "Allies", "Action", "NaN", "NaN"])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Castle", "Set":"Empires", "Types":"Victory", "Cost":"NaN", "Text":"NaN"}, index=[0])])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Knight", "Set":"Dark Ages", "Types":"Action", "Cost":"NaN", "Text":"NaN"}, index=[0])])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Townsfolk", "Set":"Allies", "Types":"Action", "Cost":"NaN", "Text":"NaN"}, index=[0])])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Augur", "Set":"Allies", "Types":"Action", "Cost":"NaN", "Text":"NaN"}, index=[0])])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Odyssey", "Set":"Allies", "Types":"Action", "Cost":"NaN","Text":"NaN"}, index=[0])])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Wizard", "Set":"Allies", "Types":"Action", "Cost":"NaN", "Text":"NaN"}, index=[0])])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Fort", "Set":"Allies", "Types":"Action", "Cost":"NaN", "Text":"NaN"}, index=[0])])
+d_table = pd.concat([d_table, pd.DataFrame({"Name":"Clash", "Set":"Allies", "Types":"Action", "Cost":"NaN", "Text":"NaN"}, index=[0])])
 d_table.reset_index(drop=True, inplace=True)
+
 
 # %% save table to db
 sq_con = sq.connect("d_db.db")
